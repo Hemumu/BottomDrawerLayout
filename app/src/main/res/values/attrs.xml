@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <declare-styleable name="bot_arr">
+        <attr name="bot_title" format="string" />
+        <attr name="bot_content" format="string" />
+    </declare-styleable>
+
+
+</resources>

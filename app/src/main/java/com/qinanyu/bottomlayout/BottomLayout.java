@@ -2,6 +2,7 @@ package com.qinanyu.bottomlayout;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
+import android.widget.TextView;
 
 /**
  * Created by helin on 2017/1/19.
@@ -36,29 +38,55 @@ public class BottomLayout extends LinearLayout{
     private ScrollView mScroll;
 
     private final int MINHRIGHT =200;
+    private TextView mTitleView;
+    private TextView mContentView;
 
 
     public BottomLayout(Context context) {
         super(context);
-        initView(context);
+        initView(context,null);
     }
 
     public BottomLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
-        initView(context);
+        initView(context,attrs);
     }
 
     public BottomLayout(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        initView(context);
+        initView(context,attrs);
     }
 
-    private void initView(Context context) {
+    private void initView(Context context, AttributeSet attrs) {
+
+
+        TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.bot_arr);
+
+
+        String title = ta.getString(R.styleable.bot_arr_bot_title);
+        String content = ta.getString(R.styleable.bot_arr_bot_content);
+        ta.recycle();
+
         LayoutInflater inflater = LayoutInflater.from(context);
         mView = inflater.inflate(R.layout.bottom_layout,this,true);
         mScroll = (ScrollView)mView.findViewById(R.id.scroll_view);
+        mTitleView = (TextView) mView.findViewById(R.id.bot_title_text);
+        mContentView = (TextView) mView.findViewById(R.id.bot_content);
+
+        mTitleView.setText(title);
+        mContentView.setText(content);
+
         this.context=context;
     }
+
+    public void setTtitle ( String title ){
+        mTitleView.setText(title);
+    }
+
+    public void setContent( String content ){
+        mContentView.setText(content);
+    }
+
 
     int maxBottom;
 
