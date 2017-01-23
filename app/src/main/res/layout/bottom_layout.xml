@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="5dp"
+    android:clickable="true"
+    android:orientation="vertical"
+    android:background="#50000000"
+    tools:context="com.qinanyu.bottomlayout.MainActivity">
+
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="0dp"
+            android:textColor="#ffffff"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:padding="5dp"
+            android:maxLines="2"
+            android:textStyle="bold"
+            android:text="江西农名工带被褥行李蹲守“讨薪办”等过年"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="18sp"
+            android:text="12/20"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/scroll_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:textColor="#ffffff"
+            android:textSize="15sp"
+            android:padding="5dp"
+            android:text="讨讨办薪和和空格一样讨办薪起来和空空格一样但是就是因为它的存在校验不通过。空格一样但是就是因为它的存在校验。空格一样但是就是因为它的存在校验不通过。空格一样但是就是因为它的存在校验不通过。空格一样但是就是因为它的存在校验不通过。空格一样但是就是因为它的存在校验不通过。空格一样但是就是因为它的存在校验不通过。空格一样但是就是因为它的存在校验不通过不通过。空格一样但是就是因为它的存在校验不通过。格一样但是就是因为它的存在校验不通过。去掉就能过了。薪讨薪讨薪讨薪办薪讨薪办薪讨薪讨薪办薪讨薪办薪讨薪”“讨薪讨薪办”“讨薪讨薪讨薪薪办”“讨薪讨薪办”“讨薪讨薪办”等过年"
+            android:layout_height="100dp" />
+    </ScrollView>
+
+</LinearLayout>
