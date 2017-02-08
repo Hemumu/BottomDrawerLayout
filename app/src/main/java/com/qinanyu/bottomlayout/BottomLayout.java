@@ -86,21 +86,31 @@ public class BottomLayout extends LinearLayout {
     }
 
     public void setContent(String content) {
+        ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
+        layout.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+        layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
+        mScroll.setLayoutParams(layout);
         mContentView.setText(content);
-
-        mIsUpdate=true;
+        mIsUpdate = true;
     }
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
+    }
+
+    private int lastHeight;
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
         if (mIsUpdate) {
-            mIsUpdate=false;
+            mIsUpdate = false;
             final int scHeight = mScroll.getHeight();
+            lastHeight = scHeight;
             maxBottom = getBottom();
-            Log.e("onLayout", "*****" + scHeight);
             if (scHeight > MINHRIGHT) {
-//                setVisibility(View.INVISIBLE);
+                setVisibility(View.INVISIBLE);
                 if (scHeight > 400) {
                     ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
                     layout.height = MINHRIGHT * 2;
@@ -113,20 +123,35 @@ public class BottomLayout extends LinearLayout {
                     public void run() {
                         bottomtop = getTop() + (mScroll.getHeight() - MINHRIGHT);
                         bottombot = getBottom() + (mScroll.getHeight() - MINHRIGHT);
-                        Log.e("postDelayed",mScroll.getHeight()+"**"+bottomtop);
                         layout(getLeft(), bottomtop, getRight(), bottombot);
-//                        setVisibility(View.VISIBLE);
+                        setVisibility(View.VISIBLE);
+//                        Log.e("postDelayed", mScroll.getHeight() + "****" + bottombot);
                     }
                 }, 200);
+            }else{
+                bottombot=0;
+                maxBottom = getBottom();
             }
+            Log.e("bianjjie", bottombot + "****" + maxBottom);
         }
     }
 
+
+    /**
+     * 拦截事件
+     * @param ev
+     * @return
+     */
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
         return super.onInterceptTouchEvent(ev);
     }
 
+    /**
+     * 分发事件
+     * @param event
+     * @return
+     */
     @Override
     public boolean dispatchTouchEvent(MotionEvent event) {
 
@@ -191,7 +216,6 @@ public class BottomLayout extends LinearLayout {
             case MotionEvent.ACTION_CANCEL:
                 break;
         }
-
         return super.dispatchTouchEvent(event);
     }
 
