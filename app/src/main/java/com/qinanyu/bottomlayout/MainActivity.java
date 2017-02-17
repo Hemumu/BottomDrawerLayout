@@ -7,12 +7,14 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private BottomLayout mBottomLayout;
+    private TestBottomLayout mBottomLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mBottomLayout = (BottomLayout)findViewById(R.id.bottom_layout);
+
+
+        mBottomLayout = (TestBottomLayout)findViewById(R.id.bottom_layout);
         mBottomLayout.setTtitle("这是一个普通话新闻个普通话新闻个普通话新闻的标题");
 
         mBottomLayout.setContent("zheshi yi shh hs卡号升到发货发是一个普通话新闻" +
@@ -25,9 +27,13 @@ public class MainActivity extends AppCompatActivity {
         ((TextView)findViewById(R.id.test_tev)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mBottomLayout.setContent("zheshi yi shh hsj 上升号就我 就升到发货我是安徽卡号就我 就升到发货我是安徽卡号就我 就就我 就是一啊婚纱哈啊哈哈啊 ");
+                mBottomLayout.setContent("zhe发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货我 就升到号就我 就升到号就我 就升到 就升到发货我 ");
                 mBottomLayout.invalidate();
+
             }
         });
+
+
+
     }
 }

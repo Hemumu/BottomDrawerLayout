@@ -18,7 +18,7 @@
         android:layout_weight="1"
         android:layout_height="wrap_content"></View>
 
-    <com.qinanyu.bottomlayout.BottomLayout
+    <com.qinanyu.bottomlayout.TestBottomLayout
         android:id="@+id/bottom_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -27,8 +27,7 @@
             发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是发是安徽我是安徽卡货发货我是
             发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡号就我  "
         app:bot_title="江西农名工带头">
-
-    </com.qinanyu.bottomlayout.BottomLayout>
+    </com.qinanyu.bottomlayout.TestBottomLayout>
 
     <LinearLayout
         android:id="@+id/text_text"
