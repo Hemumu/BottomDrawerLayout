@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_test_text"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.qinanyu.bottomlayout.TestTextActivity">
+
+
+    <TextView
+        android:id="@+id/test_te"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:minHeight="100dp"
+        android:maxHeight="200dp"
+        android:scrollbars="vertical"
+        android:background="#ee4434"
+        android:text="jahas ahj啊奥哈j啊奥哈j啊奥哈j啊j啊奥哈j啊奥哈j啊j啊奥哈j啊奥哈j啊j啊奥哈j啊奥哈j啊奥哈j啊奥哈j啊奥哈上"
+        />
+
+</RelativeLayout>

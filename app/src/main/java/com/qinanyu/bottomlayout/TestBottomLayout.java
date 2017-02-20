@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Rect;
+import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -34,7 +35,6 @@ public class TestBottomLayout extends LinearLayout {
     private boolean isFirst = true;
     private final String TAG = "BottomLayout";
     private Context context;
-    private MaxHeightScrollView mScroll;
 
     private final int MINHRIGHT = 200;
     private TextView mTitleView;
@@ -47,6 +47,10 @@ public class TestBottomLayout extends LinearLayout {
     private boolean mIsUpdate = false;
     private TextView mPageNum;
     private LinearLayout mTitleLayout;
+    private LinearLayout mBao;
+    private int bottomtop2;
+    private int bottombot2;
+    private Runnable mRun;
 
     public TestBottomLayout(Context context) {
         super(context);
@@ -72,15 +76,18 @@ public class TestBottomLayout extends LinearLayout {
 
         LayoutInflater inflater = LayoutInflater.from(context);
         mView = inflater.inflate(R.layout.bottom_layout2, this, true);
-        mScroll = (MaxHeightScrollView) mView.findViewById(R.id.scroll_view);
 
         mTitleView = (TextView) mView.findViewById(R.id.bot_title_text);
         mContentView = (TextView) mView.findViewById(R.id.bot_content);
         mPageNum = (TextView) mView.findViewById(R.id.page_num);
         mTitleLayout = (LinearLayout) mView.findViewById(R.id.title_layout);
 
+        mBao = (LinearLayout)mView.findViewById(R.id.bao_layout2);
+
+        mContentView.setMovementMethod(new ScrollingMovementMethod());
+
         mTitleView.setText(title);
-        mContentView.setText(content);
+//        mContentView.setText(content);
         this.context = context;
     }
 
@@ -105,7 +112,7 @@ public class TestBottomLayout extends LinearLayout {
     private int lastTop = 0;
 
 
-
+    private boolean onTouch =true;
 
     /**
      * 设置内容
@@ -117,34 +124,59 @@ public class TestBottomLayout extends LinearLayout {
 //        layout.height = ViewGroup.LayoutParams.WRAP_CONTENT;
 //        layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
 //        mScroll.setLayoutParams(layout);
+
+
+
         mIsUpdate = true;
         mContentView.setText(content);
+        mTitleView.removeCallbacks(mRun);
+        onTouch=false;
 
-        mContentView.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Log.e("*****",bottomtop+"---"+bottombot);
-                layout(getLeft(), bottomtop, getRight(), bottombot);
-            }
-        },200);
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 if (mIsUpdate) {
                     mIsUpdate = false;
-                    int scHeight = mScroll.getHeight();
+                    int scHeight = mContentView.getHeight();
                     bottomtop = getTop();
+                    bottomtop2=mBao.getTop();
+
                     bottombot = getBottom();
+                    bottombot2=mBao.getBottom();
+
                     maxBottom = getBottom();
-                    if (scHeight > 200) {
-                        bottomtop = getTop() + (mScroll.getHeight() - MINHRIGHT);
-                        bottombot = getBottom() + (mScroll.getHeight() - MINHRIGHT);
+                    if (scHeight > pixelsToDp(context,100)) {
+                        bottomtop = getTop() + (mContentView.getHeight() - MINHRIGHT);
+                        bottombot = getBottom() + (mContentView.getHeight() - MINHRIGHT);
+
+                        bottomtop2 = mBao.getTop() + (mContentView.getHeight() - MINHRIGHT);
+                        bottombot2 = mBao.getBottom() + (mContentView.getHeight() - MINHRIGHT);
                     }
 
+//                    mBao.removeView(mContentView);
+//                    mContentView = new TextView(context);
+//                    mContentView.setMaxHeight(200);
+//                    mContentView.setMinHeight(100);
+//                    mContentView.setTextSize(15);
+//                    mContentView.setPadding(5,5,5,5);
+//                    mContentView.setTextColor(Color.WHITE);
+//                    mContentView.setScrollBarStyle(mContentView.getScrollBarStyle());
+//                    mContentView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
+//                            LayoutParams.WRAP_CONTENT));
+//                    mBao.addView(mContentView);
 
+                    mBao.layout(getLeft(), bottomtop2, getRight(), bottombot2);
+
+                    mTitleView.postDelayed(mRun =new Runnable() {
+                        @Override
+                        public void run() {
+                            layout(getLeft(), bottomtop, getRight(), bottombot);
+                            mBao.layout(getLeft(), 0, getRight(), mBao.getHeight());
+                            onTouch=true;
+                            Log.e("*****", bottomtop + "---" + bottombot);
+                        }
+                    }, 800);
                 }
-
-
             }
         });
 //        if (scHeight == 0) {
@@ -184,41 +216,14 @@ public class TestBottomLayout extends LinearLayout {
 
     }
 
-    @Override
-    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-        super.onMeasure(widthMeasureSpec, heightMeasureSpec);
-    }
-
-    /**
-     * Size Changed
-     *
-     * @param w
-     * @param h
-     * @param oldw
-     * @param oldh
-     */
-    @Override
-    protected void onSizeChanged(int w, int h, int oldw, int oldh) {
-        super.onSizeChanged(w, h, oldw, oldh);
-//        Log.e("**onSizeChanged**","w--"+w+"--h"+h+"  oldw--"+oldw+"   oldh--"+oldh);
-//        int scHeight = mScroll.getHeight();
-//        Log.e("***--***","scHeight: "+scHeight+" getTop"+getTop());
-
-    }
-
-
-    @Override
-    protected void onAnimationStart() {
-        super.onAnimationStart();
-    }
 
 
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
-        super.onLayout(changed, l, 200, r, 600);
+        super.onLayout(changed, l, t, r, b);
 
-        Log.e("onLayout***", changed + "***" + l + "***" + t + "***" + r + "***" + b);
+//        Log.e("onLayout***", changed + "***" + l + "***" + t + "***" + r + "***" + b);
 
 
 //        if (mIsUpdate) {
@@ -301,6 +306,10 @@ public class TestBottomLayout extends LinearLayout {
             isFirst = false;
         }
 
+        if(!onTouch){
+            return true;
+        }
+
         switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 lastX = event.getRawX();
@@ -348,6 +357,15 @@ public class TestBottomLayout extends LinearLayout {
                 break;
         }
         return super.dispatchTouchEvent(event);
+    }
+
+
+    public  int dpToPixels(Context c, int dp) {
+        return (int)(c.getResources().getDisplayMetrics().density * dp);
+    }
+
+    public  int pixelsToDp(Context c, int pixel) {
+        return (int)((float)pixel / c.getResources().getDisplayMetrics().density);
     }
 
 }
