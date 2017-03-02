@@ -82,12 +82,11 @@ public class TestBottomLayout extends LinearLayout {
         mPageNum = (TextView) mView.findViewById(R.id.page_num);
         mTitleLayout = (LinearLayout) mView.findViewById(R.id.title_layout);
 
-        mBao = (LinearLayout)mView.findViewById(R.id.bao_layout2);
+        mBao = (LinearLayout)mView.findViewById(R.id.bao_layout);
 
         mContentView.setMovementMethod(new ScrollingMovementMethod());
 
         mTitleView.setText(title);
-//        mContentView.setText(content);
         this.context = context;
     }
 
@@ -120,13 +119,6 @@ public class TestBottomLayout extends LinearLayout {
      * @param content
      */
     public void setContent(final String content) {
-//        ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
-//        layout.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-//        layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//        mScroll.setLayoutParams(layout);
-
-
-
         mIsUpdate = true;
         mContentView.setText(content);
         mTitleView.removeCallbacks(mRun);
@@ -140,7 +132,6 @@ public class TestBottomLayout extends LinearLayout {
                     int scHeight = mContentView.getHeight();
                     bottomtop = getTop();
                     bottomtop2=mBao.getTop();
-
                     bottombot = getBottom();
                     bottombot2=mBao.getBottom();
 
@@ -153,17 +144,7 @@ public class TestBottomLayout extends LinearLayout {
                         bottombot2 = mBao.getBottom() + (mContentView.getHeight() - MINHRIGHT);
                     }
 
-//                    mBao.removeView(mContentView);
-//                    mContentView = new TextView(context);
-//                    mContentView.setMaxHeight(200);
-//                    mContentView.setMinHeight(100);
-//                    mContentView.setTextSize(15);
-//                    mContentView.setPadding(5,5,5,5);
-//                    mContentView.setTextColor(Color.WHITE);
-//                    mContentView.setScrollBarStyle(mContentView.getScrollBarStyle());
-//                    mContentView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT,
-//                            LayoutParams.WRAP_CONTENT));
-//                    mBao.addView(mContentView);
+
 
                     mBao.layout(getLeft(), bottomtop2, getRight(), bottombot2);
 
@@ -179,39 +160,6 @@ public class TestBottomLayout extends LinearLayout {
                 }
             }
         });
-//        if (scHeight == 0) {
-//            return;
-//        }
-//        maxBottom = getBottom();
-//        if (scHeight > MINHRIGHT) {
-//            bottomtop = lastTop + (scHeight > 400 ? 200 : scHeight - MINHRIGHT);
-//            bottombot = getBottom() + (scHeight > 400 ? 200 : scHeight - MINHRIGHT);
-//            lastTop = getTop();
-//            Log.e("mScroll2-----", "gettop" + getTop() + " getHeight" + mScroll.getHeight() + "  scHeight():" + scHeight + "  getBottom():" + getBottom());
-////                    Log.e("mScroll2-----", "bottomtop :" + mScroll.getHeight() + "  bottombot :" + bottombot + "  getTop():" + getTop() + "  getBottom():" + getBottom());
-////                    layout(getLeft(), bottomtop, getRight(), bottombot);
-//            if (scHeight > 400) {
-//                ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
-//                layout.height = MINHRIGHT * 2;
-//                layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//                mScroll.setLayoutParams(layout);
-//            } else {
-//                ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
-//                layout.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-//                layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//                mScroll.setLayoutParams(layout);
-//            }
-//        } else {
-//            lastTop = getTop();
-//            Log.e("******", getTop() + "");
-//            ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
-//            layout.height = MINHRIGHT;
-//            layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//            mScroll.setLayoutParams(layout);
-//            bottombot = 0;
-//            maxBottom = getBottom();
-
-//        }
 
 
     }
@@ -223,56 +171,6 @@ public class TestBottomLayout extends LinearLayout {
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
 
-//        Log.e("onLayout***", changed + "***" + l + "***" + t + "***" + r + "***" + b);
-
-
-//        if (mIsUpdate) {
-//            mIsUpdate = false;
-//            int scHeight = mScroll.getHeight();
-//            Log.e("***--***","scHeight: "+scHeight+" getTop"+getTop());
-//            bottomtop=getTop();
-//            bottombot = getBottom();
-//            maxBottom = getBottom();
-//            if(scHeight>200){
-//                bottomtop = getTop() + (mScroll.getHeight() - MINHRIGHT);
-//                bottombot = getBottom() + (mScroll.getHeight() - MINHRIGHT);
-//                t=bottomtop;
-//                b=bottombot;
-//            }
-//
-//        }
-
-//        if (mIsUpdate) {
-//            mIsUpdate = false;
-//            final int scHeight = mScroll.getHeight();
-//            Log.e("onLayout","****"+scHeight);
-//            maxBottom = getBottom();
-//            if (scHeight > MINHRIGHT) {
-//                if (scHeight > 400) {
-//                    ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
-//                    layout.height = MINHRIGHT * 2;
-//                    layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//                    mScroll.setLayoutParams(layout);
-//                } else {
-//                    bottomtop = getTop() + (mScroll.getHeight() - MINHRIGHT);
-//                    bottombot = getBottom() + (mScroll.getHeight() - MINHRIGHT);
-//
-////                    mScroll.postDelayed(new Runnable() {
-////                        @Override
-////                        public void run() {
-////                            layout(getLeft(), bottomtop, getRight(), bottombot);
-////                        }
-////                    }, 300);
-//                }
-//            } else {
-//                ViewGroup.LayoutParams layout = mScroll.getLayoutParams();
-//                layout.height = MINHRIGHT;
-//                layout.width = ViewGroup.LayoutParams.MATCH_PARENT;
-//                mScroll.setLayoutParams(layout);
-//                bottombot = 0;
-//                maxBottom = getBottom();
-//            }
-//        }
     }
 
     /**

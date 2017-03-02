@@ -18,14 +18,13 @@ public class MainActivity extends AppCompatActivity {
         mBottomLayout.setTtitle("这是一个普通话新闻个普通话新闻个普通话新闻的标题");
 
         mBottomLayout.setContent("zheshi yi shh hs卡号升到发货发是一个普通话新闻" +
-                "个普通话新闻个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话新闻个普通话" +
-                "我是安徽卡号升到发是安徽我是安徽卡号就我  ");
+                "个普通话新闻个普通话是一个普通话新闻个" +
+                "徽我是安个普通话是一个普通话新 ");
         ((TextView)findViewById(R.id.test_tev)).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mBottomLayout.setContent("zhe发货徽我是安个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一个普通话是一个普通话新闻个普通话新闻个普通话是一徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货发货我是安徽卡号升到发是安徽我是安徽卡货我 就升到号就我 就升到号就我 就升到 就升到发货我 ");
                 mBottomLayout.invalidate();
-//                startActivity(new Intent(MainActivity.this,TestTextActivity.class));
 
             }
         });

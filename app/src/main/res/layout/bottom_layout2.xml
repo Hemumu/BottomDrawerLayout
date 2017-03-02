@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:id="@+id/bao_layout2"
+        android:id="@+id/bao_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#50000000"
@@ -33,7 +33,7 @@
                 android:layout_weight="1"
                 android:maxLines="2"
                 android:padding="5dp"
-                android:text="11"
+                android:text="11 "
                 android:textColor="#ffffff"
                 android:textSize="20sp"
                 android:textStyle="bold" />
