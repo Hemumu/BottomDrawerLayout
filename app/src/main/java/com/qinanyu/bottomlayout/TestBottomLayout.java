@@ -7,7 +7,6 @@ import android.graphics.Rect;
 import android.text.method.ScrollingMovementMethod;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,7 +46,7 @@ public class TestBottomLayout extends LinearLayout {
     private boolean mIsUpdate = false;
     private TextView mPageNum;
     private LinearLayout mTitleLayout;
-    private LinearLayout mBao;
+    private LinearLayout mOuterLayout;
     private int bottomtop2;
     private int bottombot2;
     private Runnable mRun;
@@ -67,6 +66,11 @@ public class TestBottomLayout extends LinearLayout {
         initView(context, attrs);
     }
 
+    /**
+     * 初始化View
+     * @param context
+     * @param attrs
+     */
     private void initView(Context context, AttributeSet attrs) {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.bot_arr);
 
@@ -82,10 +86,10 @@ public class TestBottomLayout extends LinearLayout {
         mPageNum = (TextView) mView.findViewById(R.id.page_num);
         mTitleLayout = (LinearLayout) mView.findViewById(R.id.title_layout);
 
-        mBao = (LinearLayout)mView.findViewById(R.id.bao_layout);
-
+        mOuterLayout= (LinearLayout)mView.findViewById(R.id.outer_layout);
+        mContentView.setText(content);
+        //设置TextView可以滚动
         mContentView.setMovementMethod(new ScrollingMovementMethod());
-
         mTitleView.setText(title);
         this.context = context;
     }
@@ -123,7 +127,7 @@ public class TestBottomLayout extends LinearLayout {
         mContentView.setText(content);
         mTitleView.removeCallbacks(mRun);
         onTouch=false;
-
+        //添加全局布局侦听器
         getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
@@ -131,54 +135,39 @@ public class TestBottomLayout extends LinearLayout {
                     mIsUpdate = false;
                     int scHeight = mContentView.getHeight();
                     bottomtop = getTop();
-                    bottomtop2=mBao.getTop();
+                    bottomtop2=mOuterLayout.getTop();
                     bottombot = getBottom();
-                    bottombot2=mBao.getBottom();
+                    bottombot2=mOuterLayout.getBottom();
 
                     maxBottom = getBottom();
                     if (scHeight > pixelsToDp(context,100)) {
                         bottomtop = getTop() + (mContentView.getHeight() - MINHRIGHT);
                         bottombot = getBottom() + (mContentView.getHeight() - MINHRIGHT);
 
-                        bottomtop2 = mBao.getTop() + (mContentView.getHeight() - MINHRIGHT);
-                        bottombot2 = mBao.getBottom() + (mContentView.getHeight() - MINHRIGHT);
+                        bottomtop2 = mOuterLayout.getTop() + (mContentView.getHeight() - MINHRIGHT);
+                        bottombot2 = mOuterLayout.getBottom() + (mContentView.getHeight() - MINHRIGHT);
                     }
-
-
-
-                    mBao.layout(getLeft(), bottomtop2, getRight(), bottombot2);
+                    mOuterLayout.layout(getLeft(), bottomtop2, getRight(), bottombot2);
 
                     mTitleView.postDelayed(mRun =new Runnable() {
                         @Override
                         public void run() {
                             layout(getLeft(), bottomtop, getRight(), bottombot);
-                            mBao.layout(getLeft(), 0, getRight(), mBao.getHeight());
+                            mOuterLayout.layout(getLeft(), 0, getRight(), mOuterLayout.getHeight());
                             onTouch=true;
-                            Log.e("*****", bottomtop + "---" + bottombot);
                         }
                     }, 800);
                 }
             }
         });
 
-
     }
-
-
-
 
     @Override
     protected void onLayout(boolean changed, int l, int t, int r, int b) {
         super.onLayout(changed, l, t, r, b);
 
     }
-
-    /**
-     * 拦截事件
-     *
-     * @param ev
-     * @return
-     */
 
     /**
      * 分发事件
@@ -244,7 +233,7 @@ public class TestBottomLayout extends LinearLayout {
                     bottom = maxBottom;
                     top = maxBottom - getHeight();
                 }
-
+                //移动View
                 layout(getLeft(), top, getRight(), bottom);
                 lastX = event.getRawX();
                 lastY = event.getRawY();
@@ -257,11 +246,12 @@ public class TestBottomLayout extends LinearLayout {
         return super.dispatchTouchEvent(event);
     }
 
-
+    //dp转px
     public  int dpToPixels(Context c, int dp) {
         return (int)(c.getResources().getDisplayMetrics().density * dp);
     }
 
+    //px转dp
     public  int pixelsToDp(Context c, int pixel) {
         return (int)((float)pixel / c.getResources().getDisplayMetrics().density);
     }

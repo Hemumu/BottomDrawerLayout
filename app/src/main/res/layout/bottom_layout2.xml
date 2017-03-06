@@ -10,7 +10,7 @@
 
 
     <LinearLayout
-        android:id="@+id/bao_layout"
+        android:id="@+id/outer_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="#50000000"
@@ -56,7 +56,7 @@
             android:minHeight="100dp"
             android:padding="5dp"
             android:scrollbars="vertical"
-            android:text="就是因为它的因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的它的不因为的因为的不因为但为年"
+            android:text="就是因为它的因为的它的不年"
             android:textColor="#ffffff"
             android:textSize="15sp" />
     </LinearLayout>
