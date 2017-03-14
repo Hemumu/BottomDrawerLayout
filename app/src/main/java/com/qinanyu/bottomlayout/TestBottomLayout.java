@@ -191,6 +191,8 @@ public class TestBottomLayout extends LinearLayout {
             // 得到屏幕的高
             screenHeight = displayMetrics.heightPixels - (statusBarHeight + titleBarHeight);
             isFirst = false;
+
+
         }
 
         if(!onTouch){
